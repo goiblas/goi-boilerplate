@@ -1,0 +1,8 @@
+/**
+ * Basic typography style for copy text
+ */
+
+body {
+  color: $c-text-primary;
+  font: normal $fz-base / $lh-base $ff-sans-serif;
+}

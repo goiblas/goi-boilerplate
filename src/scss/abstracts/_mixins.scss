@@ -1,0 +1,150 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+// grid generator with flexbox
+@mixin grid($cols: 2, $gutter: $w-gutter) {
+  display: flex;
+  justify-content: space-between;
+  max-width: $w-layout;
+
+  &__child {
+    width: calc((100% / #{$cols}) - (#{$gutter} - (#{$gutter} / #{$cols}) ));
+  }
+}
+
+
+// obtengo el número de columnas que aparecen en ese viewport
+@function get-columns($size, $cols: $cols-for-row) {
+  @if map-has-key($cols, $size) and $size != small {
+    @return map-get($cols, $size);
+  }
+
+  @return null;
+};
+
+@function is-number($value) {
+  @return type-of($value) == 'number';
+}
+
+@function get-media-query($value) {
+  @if(is-number($value)) {
+    @return $value;
+  }
+  @return map-get($breakpoints, $value);
+}
+
+
+// grip flexible de columnas x filas en cada viewport
+// @parametros: Separación entre columnas, columnas por viewport, nombre de los viewport y su definición de tamaño
+@mixin grid-wrap($gutter: $w-gutter, $cols: $cols-for-row, $breaks: $breakpoints) {
+  $break-names: map-keys($breaks);
+
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(100% - (#{$w-gutter}/2));
+  margin: 0 (-$w-gutter/2);
+
+  &__child {
+    flex: 1;
+    @if map-has-key($cols, small) {
+      min-width: calc(100% / #{map-get($cols, small)} - #{$gutter});
+    }
+    margin: 0 ($gutter/2) 35px;
+
+    @each $break in $break-names {
+
+      @if get-columns($break, $cols) {
+
+        @media (min-width: map-get($breaks, $break)) {
+          min-width: calc(100% / #{get-columns($break, $cols)} - #{$gutter});
+        }
+      }
+    }
+  }
+}
+
+
+// grid con una columna con anchura fija
+// @parametros: ubicación de la columna fija, anchura de la columna fija, espacio entre columnas y desde que anchura de la pantalla funciona
+@mixin grid-column-fixed($ubicacion: left, $width: 286px, $gutter: $w-gutter, $beginpoint: medium) {
+  @media (min-width: get-media-query($beginpoint)) {
+    display: flex;
+
+    &__child--wfixed {
+      width: $width;
+    }
+
+    &__child--main {
+      flex: 1;
+      margin-#{$ubicacion}: $gutter;
+    }
+  }
+}
+
+// Generator arrows
+@mixin arrow($size: 12px, $height: 1px, $color: $c-gray, $direction: right) {
+  position: relative;
+  width: $size;
+  height: $height;
+  border-radius: $size / 2;
+  background-color: $color;
+
+  @if $direction == left {
+    transform: rotate(180deg);
+  }
+
+  @if $direction == top {
+    transform: rotate(-90deg);
+  }
+
+  @if $direction == bottom {
+    transform: rotate(90deg);
+  }
+
+  &::after,
+  &::before {
+    position: absolute;
+    right: $height / 2;
+    width: $size / 2;
+    height: $height;
+    transform-origin: center right;
+    border-radius: ($size / 2) 0 0 ($size / 2);
+    background-color: $color;
+    content: '';
+  }
+
+  &::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+  }
+
+  &::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+}
+
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}

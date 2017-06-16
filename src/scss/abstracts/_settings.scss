@@ -1,0 +1,97 @@
+// COLORS
+// ----------------------------------------------------------------------------
+
+// Main
+$c-primary-light: #feddb8 !default;
+$c-primary: #ff9015 !default;
+$c-primary-dark: #2a2b30 !default;
+$c-secondary: #535459 !default;
+$c-secondary-dark: #222222 !default;
+
+$c-accent: #964200 !default;
+$c-accent-light: #caa080 !default;
+$c-accent-dark: #612a00 !default;
+
+$c-white: #ffffff !default;
+$c-black: #000000 !default;
+
+$c-error: #d92b2b !default;
+$c-warning: #e69c2e !default;
+$c-success: #8cbf26 !default;
+
+// Text
+$c-text-primary: #111111 !default;
+$c-text-primary-light: #666666 !default;
+$c-text-secondary: #ea2b31 !default;
+
+// Grays
+$c-gray: #777777 !default;
+$c-gray-dark: #4d4d4d !default;
+$c-gray-light: #bbbbbb !default;
+$c-gray-lightest: #e9e9e9 !default;
+
+// Social
+$c-facebook: #3b5998 !default;
+$c-twitter: #55acee !default;
+$c-google: #d34836 !default;
+$c-youtube: #bb0000 !default;
+
+
+// TYPOGRAFY
+// ----------------------------------------------------------------------------
+
+// Font family
+$ff-sans-serif: Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif' !default;
+
+// Line heights
+$lh-base: 1.715 !default;
+
+// Font sizes
+$fz-base: 16px !default;
+$fz-h1: 32px !default;
+$fz-h2: 24px !default;
+$fz-h3: 18px !default;
+$fz-h4: 14px !default;
+$fz-h5: 12px !default;
+
+
+// LAYOUT
+// ----------------------------------------------------------------------------
+$w-layout: 944px !default;
+$w-layout-large: 1280px !default;
+
+// gutter
+$w-gutter: 35px !default;
+$sp-margin-bottom: 35px!default;
+
+// Breakpoints
+$breakpoints: (
+  small: 767px,
+  medium: 992px,
+  large: 1200px,
+) !default;
+
+$cols-for-row: (
+  small: 2,
+  medium: 3,
+  large: 5
+) !default;
+
+// UTILS
+// ----------------------------------------------------------------------------
+$b-radius: 4px !default;
+$sp-margin-bottom: 1.2em !default;
+
+
+// TRANSITIONS
+// ----------------------------------------------------------------------------
+$transition-fast: all .3s ease-out;
+$transition: all .4s ease-out;
+$transition-slow: all .6s ease-out;
+$anim-speed: .3s;
+
+// Z-INDEX
+// ----------------------------------------------------------------------------
+$z-modal: 30;
+$z-dropdown: 20;
+$z-topbar: 10;
